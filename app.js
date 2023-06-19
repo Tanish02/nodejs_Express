@@ -1,27 +1,26 @@
-const express = require('express');
-
-const bodyparser = require('body-parser');
 const path = require('path');
+
+const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-const rootDir = require('./util/path')
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-const adminrouter = require('./routes/admin');
-const shoprouter = require('./routes/shop');
+const adminData = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.use(bodyparser.urlencoded({extended : false}));
-app.use(express.static(path.join(rootDir, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use('/admin',adminrouter);
-app.use(shoprouter);
+app.use('/admin', adminData.routes);
+app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-
-})
-
+  res.status(404).render('404', { pageTitle: 'Page Not Found', path : '404' });
+});
 
 
+console.log("Running on port : 3000");
 app.listen(3000);
