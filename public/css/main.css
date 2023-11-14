@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+
 body{
     padding: 0;
     margin: 0;
@@ -5,17 +8,33 @@ body{
 }
 main{
     padding: 2rem;
+    padding-top: 100px;
+
+    
 }
+
+.centered {
+  text-align: center;
+}
+
+.center{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 
 .main-header{
     width: 100%;
+    position: fixed;
     height: 3.5rem;
     background: linear-gradient(
         82.3deg,
-        rgba(150, 93, 233, 1) 10.8%,
-        rgba(99, 88, 238, 1) 94.3%
+        #6cd5ce 10.8%,
+        #99f2f0 94.3%
     );
     padding: 0 1.5rem;
+    
 }
 
 .main-header_nav{
@@ -35,6 +54,7 @@ main{
     transform: scale(0.9);
     transition: all 0.3s;
 
+
 }
 
 .main-header_item a{
@@ -42,13 +62,96 @@ main{
     padding: 0;
     text-decoration: none;
     color: white;
+    
 }
 
 .main-header_item a:hover,
 .main-header_item a:active,
 .main-header_item a.active{
-    color :#301888;
+    color :#086f6b;
+    font-weight: bold;
+    
+    
 }
+
+.mobile-nav {
+    width: 30rem;
+    height: 100vh;
+    max-width: 90%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    z-index: 10;
+    padding: 2rem 1rem 1rem 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
+  }
+  
+  .mobile-nav.open {
+    transform: translateX(0);
+  }
+  
+  .mobile-nav__item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mobile-nav__item {
+    margin: 1rem;
+    padding: 0;
+  }
+  
+  .mobile-nav__item a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+  }
+  
+  .mobile-nav__item a:active,
+  .mobile-nav__item a:hover,
+  .mobile-nav__item a.active {
+    background: #00695c;
+    color: white;
+    border-radius: 3px;
+  }
+  
+  #side-menu-toggle {
+    border: 1px solid white;
+    font: inherit;
+    padding: 0.5rem;
+    display: block;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    top: 10px;
+  }
+  
+  #side-menu-toggle:focus {
+    outline: none;
+  }
+  
+  #side-menu-toggle:active,
+  #side-menu-toggle:hover {
+    color: #ffeb3b;
+    border-color: #ffeb3b;
+  }
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    display: none;
+  }
 
 .product-form{
     width: 20rem;
@@ -57,7 +160,8 @@ main{
 }
 
 .form-control label,
-.form-control input{
+.form-control input,
+.form-control textarea{
     display: block;
     width: 100%;
 }
@@ -66,18 +170,33 @@ main{
     margin: 1rem 0;
 }
 
-.form-control input{
+.form-control input,
+.form-control textarea{
     border : 2px solid #ffd359;
     font: inherit;
     border-radius: 2px;
 }
 .img{
-
-    position: absolute;
-    height: 70%;
-    width: auto;
+    /* position: relative ; */
+    /* height: 70%; */
+    top: 56px;
+    width: 100%;
     border-radius: 5px;
-    left: 20%;
+    /* left: 20%; */
+}
+
+.previewImg{
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  height: 236px;
+  width: 321px;
+}
+
+.previewImg > img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .grid {
@@ -112,8 +231,11 @@ main{
   }
   
   .card__actions {
-      padding: 1rem;
-      text-align: center;
+    padding: 1rem;
+    text-align: center;
+    /* align-items: center; */
+    display: flex;
+    justify-content: center;
   }
   
   .card__actions button,
@@ -123,21 +245,48 @@ main{
   
   .btn {
     font: inherit;
-    border: 1px solid #301888;
+    border: 1.5px solid #8de0dc;
     color: #2c2c2c;
     background: white;
     border-radius: 3px;
+    padding: 4px 9px;
     cursor: pointer;
   }
   
   .btn:hover,
   .btn:active {
-    background: linear-gradient(
-        82.3deg,
-        rgba(150, 93, 233, 1) 10.8%,
-        rgba(99, 88, 238, 1) 94.3%
-    );
-    color: white;
+    background: linear-gradient( 82.3deg, rgb(72 203 207) 10.8%, rgb(97 255 250) 94.3% );
+    color: #006179;
   }
 
+  .detailBox{
+    display: flex;
+  }
+  .detailBox > div > img{
+    position: inherit;
+    height: 50rem;
+    width: auto;
+  }
+  .detailBoxContainer{
+    margin: 20px;
+    font-size: x-large;
+    color: #00695c;
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .main-header_nav{
+      display: none;
+    }
+    .img{
+      
+    }
+  }
+
+  @media (min-width: 600px) {
+    #side-menu-toggle {
+      display: none;
+    }
+    
+  }
 
